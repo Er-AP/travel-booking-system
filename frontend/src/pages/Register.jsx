@@ -16,7 +16,7 @@ export default function Register({ setIsLogin }) {
     if (password.length < 6) { setError("Password must be at least 6 characters."); return; }
     setError(""); setLoading(true);
     try {
-      await axios.post(`${API_URL}/register`, { name, email, password, mobile });
+      await axios.post(`${url}/register`, { name, email, password, mobile });
       alert("Account created! Please sign in.");
       setIsLogin(true);
     } catch (err) {

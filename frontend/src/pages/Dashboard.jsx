@@ -371,7 +371,7 @@ function BookingModal({ onClose, onSuccess, prefillDest="" }) {
     }
     setError(""); setLoading(true);
     try {
-      await axios.post(`${API_URL}/bookings`,
+      await axios.post(`${url}/bookings`,
         { destination, travelDate, travelers, packageType, price, address },
         { headers:{ Authorization:`Bearer ${token}` } }
       );
@@ -481,7 +481,7 @@ export default function Dashboard() {
 
   const fetchBookings = useCallback(async () => {
     try {
-      const res = await axios.get(`${API_URL}/bookings`, { headers });
+      const res = await axios.get(`${url}/bookings`, { headers });
       setBookings(res.data);
     } catch { showToast("Failed to fetch bookings.", "error"); }
     finally { setLoading(false); }
@@ -492,7 +492,7 @@ export default function Dashboard() {
   const handleConfirm = async id => {
     setCon(id);
     try {
-      await axios.put(`${API_URL}/bookings/${id}`, { bookingStatus:"Confirmed" }, { headers });
+      await axios.put(`${url}/bookings/${id}`, { bookingStatus:"Confirmed" }, { headers });
       setBookings(prev => prev.map(b => b._id===id ? {...b, bookingStatus:"Confirmed"} : b));
       showToast("Booking confirmed! ✓");
     } catch { showToast("Update failed.", "error"); }
@@ -502,7 +502,7 @@ export default function Dashboard() {
   const handleDelete = async id => {
     setDel(id);
     try {
-      await axios.delete(`${API_URL}/bookings/${id}`, { headers });
+      await axios.delete(`${url}/bookings/${id}`, { headers });
       setBookings(prev => prev.filter(b => b._id!==id));
       showToast("Booking cancelled.");
     } catch { showToast("Delete failed.", "error"); }

@@ -12,7 +12,7 @@ export default function Login({ setIsLogin }) {
     if (!email || !password) { setError("Please fill in all fields."); return; }
     setError(""); setLoading(true);
     try {
-      const res = await axios.post(`${API_URL}/login`, { email, password });
+      const res = await axios.post(`${url}/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       window.location.reload();
     } catch (err) {
