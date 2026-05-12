@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// CORS
+// Middleware
 app.use(cors({
   origin: "*"
 }));
@@ -16,8 +16,12 @@ app.use(express.json());
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log(err));
+.then(() => {
+  console.log("MongoDB Connected");
+})
+.catch((err) => {
+  console.log(err);
+});
 
 // Test Route
 app.get("/", (req, res) => {
@@ -31,9 +35,10 @@ const bookingRoutes = require("./routes/bookingRoutes");
 app.use("/api", authRoutes);
 app.use("/api", bookingRoutes);
 
-// Server Start
+// PORT
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// Start Server
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
