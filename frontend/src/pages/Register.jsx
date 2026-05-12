@@ -20,8 +20,14 @@ export default function Register({ setIsLogin }) {
       alert("Account created! Please sign in.");
       setIsLogin(true);
     } catch (err) {
-      setError(err?.response?.data?.message || "Registration failed. Please try again.");
-    } finally {
+
+  console.log(err);
+
+  setError(
+    err?.response?.data?.msg ||
+    "Registration Failed"
+  );
+} finally {
       setLoading(false);
     }
   };

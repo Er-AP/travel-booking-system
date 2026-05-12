@@ -16,8 +16,14 @@ export default function Login({ setIsLogin }) {
       localStorage.setItem("token", res.data.token);
       window.location.reload();
     } catch (err) {
-      setError(err?.response?.data?.message || "Invalid credentials. Please try again.");
-    } finally {
+
+  console.log(err);
+
+  setError(
+    err?.response?.data?.msg ||
+    "Login Failed"
+  );
+} finally {
       setLoading(false);
     }
   };
